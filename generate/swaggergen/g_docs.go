@@ -295,7 +295,7 @@ func GenerateDocs(curpath string) {
 													controllerName = analyseNSInclude(s, pp)
 													if v, ok := controllerComments[controllerName]; ok {
 														rootapi.Tags = append(rootapi.Tags, swagger.Tag{
-															Name:        strings.Trim(s, "/"),
+															Name:        strings.Title(strings.Trim(s, "/")),
 															Description: v,
 														})
 													}
@@ -386,6 +386,8 @@ func analyseNSInclude(baseurl string, ce *ast.CallExpr) string {
 					rt = baseurl + rt
 					tag = strings.Trim(baseurl, "/")
 				}
+
+				tag = strings.Title(tag)
 				if item.Get != nil {
 					item.Get.Tags = []string{tag}
 				}
@@ -802,7 +804,7 @@ func setParamType(para *swagger.Parameter, typ string, pkgpath, controllerName s
 		paraFormat = typeFormat[1]
 		if para.In == "body" {
 			para.Schema = &swagger.Schema{
-				Type: paraType,
+				Type:   paraType,
 				Format: paraFormat,
 			}
 		}
