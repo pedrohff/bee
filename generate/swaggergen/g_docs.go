@@ -387,26 +387,25 @@ func analyseNSInclude(baseurl string, ce *ast.CallExpr) string {
 					tag = strings.Trim(baseurl, "/")
 				}
 
-				tag = strings.Title(tag)
-				if item.Get != nil {
+				if item.Get != nil && len(item.Get.Tags) == 0 {
 					item.Get.Tags = []string{tag}
 				}
-				if item.Post != nil {
+				if item.Post != nil && len(item.Post.Tags) == 0 {
 					item.Post.Tags = []string{tag}
 				}
-				if item.Put != nil {
+				if item.Put != nil && len(item.Put.Tags) == 0 {
 					item.Put.Tags = []string{tag}
 				}
-				if item.Patch != nil {
+				if item.Patch != nil && len(item.Patch.Tags) == 0 {
 					item.Patch.Tags = []string{tag}
 				}
-				if item.Head != nil {
+				if item.Head != nil && len(item.Head.Tags) == 0 {
 					item.Head.Tags = []string{tag}
 				}
-				if item.Delete != nil {
+				if item.Delete != nil && len(item.Delete.Tags) == 0 {
 					item.Delete.Tags = []string{tag}
 				}
-				if item.Options != nil {
+				if item.Options != nil && len(item.Options.Tags) == 0 {
 					item.Options.Tags = []string{tag}
 				}
 				if len(rootapi.Paths) == 0 {
@@ -729,6 +728,18 @@ func parserComments(f *ast.FuncDecl, controllerName, pkgpath string) error {
 					opts.Security = make([]map[string][]string, 0)
 				}
 				opts.Security = append(opts.Security, getSecurity(t))
+			} else if strings.HasPrefix(t, "@Tags") {
+				if len(opts.Tags) == 0 {
+					opts.Tags = make([]string, 0)
+				}
+
+				tagstrings := strings.Split(strings.TrimSpace(t[len("@Tags"):]), ",")
+				for _, val := range tagstrings {
+					if len(val) != 0 {
+						val = strings.Trim(val, " ")
+						opts.Tags = append(opts.Tags, val)
+					}
+				}
 			}
 		}
 	}
