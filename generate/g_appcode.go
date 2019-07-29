@@ -23,11 +23,11 @@ import (
 	"regexp"
 	"strings"
 
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/logger/colors"
-	"github.com/beego/bee/utils"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
+	beeLogger "github.com/pedrohff/bee/logger"
+	"github.com/pedrohff/bee/logger/colors"
+	"github.com/pedrohff/bee/utils"
 )
 
 const (

@@ -21,9 +21,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/beego/bee/logger"
-	"github.com/beego/bee/logger/colors"
-	"github.com/beego/bee/utils"
+	"github.com/pedrohff/bee/logger"
+	"github.com/pedrohff/bee/logger/colors"
+	"github.com/pedrohff/bee/utils"
 )
 
 const (

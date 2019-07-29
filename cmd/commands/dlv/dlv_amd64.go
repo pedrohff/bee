@@ -24,15 +24,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/beego/bee/cmd/commands"
-	"github.com/beego/bee/cmd/commands/version"
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/utils"
 	"github.com/derekparker/delve/service"
 	"github.com/derekparker/delve/service/rpc2"
 	"github.com/derekparker/delve/service/rpccommon"
 	"github.com/derekparker/delve/terminal"
 	"github.com/fsnotify/fsnotify"
+	"github.com/pedrohff/bee/cmd/commands"
+	"github.com/pedrohff/bee/cmd/commands/version"
+	beeLogger "github.com/pedrohff/bee/logger"
+	"github.com/pedrohff/bee/utils"
 )
 
 var cmdDlv = &commands.Command{

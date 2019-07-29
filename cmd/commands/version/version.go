@@ -14,19 +14,15 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/beego/bee/cmd/commands"
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/logger/colors"
-	"github.com/beego/bee/utils"
+	"github.com/pedrohff/bee/cmd/commands"
+	beeLogger "github.com/pedrohff/bee/logger"
+	"github.com/pedrohff/bee/logger/colors"
+	"github.com/pedrohff/bee/utils"
 	"gopkg.in/yaml.v2"
 )
 
-const verboseVersionBanner string = `%s%s______
-| ___ \
-| |_/ /  ___   ___
-| ___ \ / _ \ / _ \
-| |_/ /|  __/|  __/
-\____/  \___| \___| v{{ .BeeVersion }}%s
+const verboseVersionBanner string = `%s%s
+Bee v{{ .BeeVersion }}%s
 %s%s
 ├── Beego     : {{ .BeegoVersion }}
 ├── GoVersion : {{ .GoVersion }}
@@ -39,12 +35,7 @@ const verboseVersionBanner string = `%s%s______
 └── Date      : {{ Now "Monday, 2 Jan 2006" }}%s
 `
 
-const shortVersionBanner = `______
-| ___ \
-| |_/ /  ___   ___
-| ___ \ / _ \ / _ \
-| |_/ /|  __/|  __/
-\____/  \___| \___| v{{ .BeeVersion }}
+const shortVersionBanner = `Bee v{{ .BeeVersion }}
 `
 
 var CmdVersion = &commands.Command{

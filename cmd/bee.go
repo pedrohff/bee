@@ -16,22 +16,22 @@
 package cmd
 
 import (
-	"github.com/beego/bee/cmd/commands"
-	_ "github.com/beego/bee/cmd/commands/api"
-	_ "github.com/beego/bee/cmd/commands/bale"
-	_ "github.com/beego/bee/cmd/commands/beefix"
-	_ "github.com/beego/bee/cmd/commands/dlv"
-	_ "github.com/beego/bee/cmd/commands/dockerize"
-	_ "github.com/beego/bee/cmd/commands/generate"
-	_ "github.com/beego/bee/cmd/commands/hprose"
-	_ "github.com/beego/bee/cmd/commands/migrate"
-	_ "github.com/beego/bee/cmd/commands/new"
-	_ "github.com/beego/bee/cmd/commands/pack"
-	_ "github.com/beego/bee/cmd/commands/rs"
-	_ "github.com/beego/bee/cmd/commands/run"
-	_ "github.com/beego/bee/cmd/commands/server"
-	_ "github.com/beego/bee/cmd/commands/version"
-	"github.com/beego/bee/utils"
+	"github.com/pedrohff/bee/cmd/commands"
+	_ "github.com/pedrohff/bee/cmd/commands/api"
+	_ "github.com/pedrohff/bee/cmd/commands/bale"
+	_ "github.com/pedrohff/bee/cmd/commands/beefix"
+	_ "github.com/pedrohff/bee/cmd/commands/dlv"
+	_ "github.com/pedrohff/bee/cmd/commands/dockerize"
+	_ "github.com/pedrohff/bee/cmd/commands/generate"
+	_ "github.com/pedrohff/bee/cmd/commands/hprose"
+	_ "github.com/pedrohff/bee/cmd/commands/migrate"
+	_ "github.com/pedrohff/bee/cmd/commands/new"
+	_ "github.com/pedrohff/bee/cmd/commands/pack"
+	_ "github.com/pedrohff/bee/cmd/commands/rs"
+	_ "github.com/pedrohff/bee/cmd/commands/run"
+	_ "github.com/pedrohff/bee/cmd/commands/server"
+	_ "github.com/pedrohff/bee/cmd/commands/version"
+	"github.com/pedrohff/bee/utils"
 )
 
 func IfGenerateDocs(name string, args []string) bool {
