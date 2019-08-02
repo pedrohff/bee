@@ -11,9 +11,14 @@ import (
 )
 
 var (
-	swaggerVersion = "3"
-	swaggerlink    = "https://github.com/beego/swagger/archive/v" + swaggerVersion + ".zip"
+	swaggerVersion = "master"
+	swaggerlink    = "https://github.com/pedrohff/swagger/archive/" + swaggerVersion + ".zip"
 )
+
+func DownloadAndUnzipSwagger() {
+	downloadFromURL(swaggerlink, "swagger.zip")
+	unzipAndDelete("swagger.zip")
+}
 
 func downloadFromURL(url, fileName string) {
 	var down bool

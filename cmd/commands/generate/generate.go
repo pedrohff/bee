@@ -51,7 +51,7 @@ var CmdGenerate = &commands.Command{
 
   ▶ {{"To generate swagger doc file:"|bold}}
 
-     $ bee generate docs
+     $ bee generate docs [-d](download ui)
 
   ▶ {{"To generate a test case:"|bold}}
 
@@ -90,12 +90,20 @@ func GenerateCode(cmd *commands.Command, args []string) int {
 
 	beeLogger.Log.Debugf("GOPATH: %s", utils.FILE(), utils.LINE(), gopath)
 
+	downloadDocs := false
+	for _, value := range args {
+		if value == "-d" {
+			downloadDocs = true
+			break
+		}
+	}
+
 	gcmd := args[0]
 	switch gcmd {
 	case "scaffold":
 		scaffold(cmd, args, currpath)
 	case "docs":
-		swaggergen.GenerateDocs(currpath)
+		swaggergen.GenerateDocs(currpath, downloadDocs)
 	case "appcode":
 		appCode(cmd, args, currpath)
 	case "migration":

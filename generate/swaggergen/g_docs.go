@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/pedrohff/bee/cmd/commands/run"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -32,7 +33,7 @@ import (
 	"strings"
 	"unicode"
 
-	yaml "gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v2"
 
 	"github.com/astaxie/beego/swagger"
 	"github.com/astaxie/beego/utils"
@@ -156,7 +157,18 @@ func parsePackageFromDir(path string) error {
 }
 
 // GenerateDocs generates documentations for a given path.
-func GenerateDocs(curpath string) {
+func GenerateDocs(curpath string, downloadDocs bool) {
+
+	if downloadDocs {
+		beeLogger.Log.Info("Downloading Swagger UI")
+		if _, err := os.Stat(path.Join(curpath, "swagger", "index.html")); err != nil {
+			if os.IsNotExist(err) {
+				run.DownloadAndUnzipSwagger()
+			}
+		}
+		beeLogger.Log.Info("Downloaded and unzipped Swagger UI")
+	}
+
 	fset := token.NewFileSet()
 
 	f, err := parser.ParseFile(fset, filepath.Join(curpath, "routers", "router.go"), nil, parser.ParseComments)
