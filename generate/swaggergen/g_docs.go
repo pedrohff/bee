@@ -62,6 +62,7 @@ var controllerList map[string]map[string]*swagger.Item //controllername Paths it
 var modelsList map[string]map[string]swagger.Schema
 var rootapi swagger.Swagger
 var astPkgs []*ast.Package
+var declaredTags []string
 
 // refer to builtin.go
 var basicTypes = map[string]string{
@@ -332,6 +333,7 @@ func GenerateDocs(curpath string, downloadDocs bool) {
 			}
 		}
 	}
+	cleanEmptyTags()
 	os.Mkdir(path.Join(curpath, "swagger"), 0755)
 	fd, err := os.Create(path.Join(curpath, "swagger", "swagger.json"))
 	if err != nil {
@@ -353,6 +355,18 @@ func GenerateDocs(curpath string, downloadDocs bool) {
 	if err != nil || erryml != nil {
 		panic(err)
 	}
+}
+
+func cleanEmptyTags() {
+	var resultList []swagger.Tag
+	for _, rootApiTag := range rootapi.Tags {
+		for _, declaredTag := range declaredTags {
+			if rootApiTag.Name == declaredTag {
+				resultList = append(resultList, rootApiTag)
+			}
+		}
+	}
+	rootapi.Tags = resultList
 }
 
 // analyseNewNamespace returns version and the others params
@@ -749,6 +763,7 @@ func parserComments(f *ast.FuncDecl, controllerName, pkgpath string) error {
 				for _, val := range tagstrings {
 					if len(val) != 0 {
 						val = strings.Trim(val, " ")
+						appendTagIfMissing(val)
 						opts.Tags = append(opts.Tags, val)
 					}
 				}
@@ -1370,4 +1385,13 @@ func str2RealType(s string, typ string) interface{} {
 	}
 
 	return ret
+}
+
+func appendTagIfMissing(i string) {
+	for _, ele := range declaredTags {
+		if ele == i {
+			return
+		}
+	}
+	declaredTags = append(declaredTags, i)
 }
